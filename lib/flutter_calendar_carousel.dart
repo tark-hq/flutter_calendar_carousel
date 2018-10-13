@@ -68,6 +68,7 @@ class CalendarCarousel extends StatefulWidget {
   final Color selectedDayBorderColor;
   final bool daysHaveCircularBorder;
   final Function(DateTime) onDayPressed;
+  final Function(int) onMonthChanged;
   final TextStyle weekdayTextStyle;
   final Color iconColor;
   final TextStyle headerTextStyle;
@@ -102,6 +103,7 @@ class CalendarCarousel extends StatefulWidget {
     this.selectedDayButtonColor = Colors.green,
     this.daysHaveCircularBorder,
     this.onDayPressed,
+    this.onMonthChanged,
     this.weekdayTextStyle,
     this.iconColor = Colors.blueAccent,
     this.headerTextStyle,
@@ -419,6 +421,10 @@ class _CalendarState extends State<CalendarCarousel> {
         this._dates = dates;
       });
 
+      if (widget.onMonthChanged != null) {
+        widget.onMonthChanged(dates[2].month);
+      }
+
       print('dates');
       print(this._dates);
 
@@ -453,8 +459,7 @@ class _CalendarState extends State<CalendarCarousel> {
   }
 
   Widget _renderMarked(DateTime now) {
-    if (widget.markedDates != null &&
-        widget.markedDates.length > 0) {
+    if (widget.markedDates != null && widget.markedDates.length > 0) {
       List<DateTime> markedDates = widget.markedDates.map((date) {
         return DateTime(date.year, date.month, date.day);
       }).toList();
