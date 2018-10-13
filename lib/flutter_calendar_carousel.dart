@@ -68,7 +68,7 @@ class CalendarCarousel extends StatefulWidget {
   final Color selectedDayBorderColor;
   final bool daysHaveCircularBorder;
   final Function(DateTime) onDayPressed;
-  final Function(int) onMonthChanged;
+  final Function(DateTime) onMonthChanged;
   final TextStyle weekdayTextStyle;
   final Color iconColor;
   final TextStyle headerTextStyle;
@@ -422,7 +422,7 @@ class _CalendarState extends State<CalendarCarousel> {
       });
 
       if (widget.onMonthChanged != null) {
-        widget.onMonthChanged(dates[2].month);
+        widget.onMonthChanged(dates[2]);
       }
 
       print('dates');
