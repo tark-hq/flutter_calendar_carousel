@@ -341,25 +341,15 @@ class _CalendarState extends State<CalendarCarousel> {
                       child: Stack(
                         children: <Widget>[
                           Center(
-                            child: DefaultTextStyle(
-                              style: (index % 7 == 0 || index % 7 == 6) &&
-                                      !isSelectedDay &&
-                                      !isToday
-                                  ? widget.defaultWeekendTextStyle
-                                  : isToday
-                                      ? widget.defaultTodayTextStyle
-                                      : defaultTextStyle,
-                              child: Text(
-                                '${now.day}',
-                                style: (index % 7 == 0 || index % 7 == 6) &&
-                                        !isSelectedDay &&
-                                        !isToday
-                                    ? widget.weekendTextStyle
-                                    : isToday
-                                        ? widget.todayTextStyle
-                                        : textStyle,
-                                maxLines: 1,
-                              ),
+                            child: Text(
+                              '${now.day}',
+                              style: _dayStyle(
+                                  isNextMonth: isNextMonthDay,
+                                  isPrevMonth: isPrevMonthDay,
+                                  isWeekend: index % 7 == 0 || index % 7 == 6,
+                                  isSelected: isSelectedDay,
+                                  isToday: isToday),
+                              maxLines: 1,
                             ),
                           ),
                           _renderMarked(now),
@@ -470,5 +460,26 @@ class _CalendarState extends State<CalendarCarousel> {
       }
     }
     return Container();
+  }
+
+  TextStyle _dayStyle(
+      {bool isNextMonth,
+      bool isPrevMonth,
+      bool isWeekend,
+      bool isSelected,
+      bool isToday}) {
+    if (isNextMonth) {
+      return widget.nextDaysTextStyle ?? widget.defaultNextDaysTextStyle;
+    } else if (isPrevMonth) {
+      return widget.prevDaysTextStyle ?? widget.defaultPrevDaysTextStyle;
+    } else if (isWeekend) {
+      return widget.weekdayTextStyle ?? widget.defaultWeekdayTextStyle;
+    } else if (isSelected) {
+      return widget.selectedDayTextStyle ?? widget.defaultSelectedDayTextStyle;
+    } else if (isToday) {
+      return widget.todayTextStyle ?? widget.defaultTodayTextStyle;
+    } else {
+      return widget.daysTextStyle ?? widget.defaultDaysTextStyle;
+    }
   }
 }
