@@ -422,7 +422,7 @@ class _CalendarState extends State<CalendarCarousel> {
       });
 
       if (widget.onMonthChanged != null) {
-        widget.onMonthChanged(dates[2]);
+        widget.onMonthChanged(dates[1]);
       }
 
       print('dates');
