@@ -462,22 +462,23 @@ class _CalendarState extends State<CalendarCarousel> {
     return Container();
   }
 
-  TextStyle _dayStyle(
-      {bool isNextMonth,
-      bool isPrevMonth,
-      bool isWeekend,
-      bool isSelected,
-      bool isToday}) {
+  TextStyle _dayStyle({
+    bool isNextMonth,
+    bool isPrevMonth,
+    bool isSelected,
+    bool isToday,
+    bool isWeekend,
+  }) {
     if (isNextMonth) {
       return widget.nextDaysTextStyle ?? widget.defaultNextDaysTextStyle;
     } else if (isPrevMonth) {
       return widget.prevDaysTextStyle ?? widget.defaultPrevDaysTextStyle;
-    } else if (isWeekend) {
-      return widget.weekdayTextStyle ?? widget.defaultWeekdayTextStyle;
     } else if (isSelected) {
       return widget.selectedDayTextStyle ?? widget.defaultSelectedDayTextStyle;
     } else if (isToday) {
       return widget.todayTextStyle ?? widget.defaultTodayTextStyle;
+    } else if (isWeekend) {
+      return widget.weekendTextStyle ?? widget.defaultWeekendTextStyle;
     } else {
       return widget.daysTextStyle ?? widget.defaultDaysTextStyle;
     }
